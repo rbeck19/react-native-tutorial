@@ -14,13 +14,24 @@
     },
     "ios": {
       "supportsTablet": true,
-      "package": "com.jsm.aoracourse"
+      "package": "com.jsm.aoracourse",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "INTERNET",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+
     },
     "web": {
       "bundler": "metro",

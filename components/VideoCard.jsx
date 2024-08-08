@@ -1,6 +1,7 @@
  import { View, Text, Image, TouchableOpacity } from 'react-native'
  import React, { useState } from 'react'
 import { icons, images } from '../constants'
+import { Video, ResizeMode } from 'expo-av'
  
  const VideoCard = ({ video :{title, thumbnail, video, creater:{username, avatar} } }) => {
 
@@ -22,18 +23,30 @@ import { icons, images } from '../constants'
                 <Image source={icons.menu} className="w-5 h-5" resizeMode='contain'/>
             </View>
         </View>
-        <View>
-            {play ? 
-            <TouchableOpacity className="w-full h-60 items-center justify-center" onPress={()=>setPlay(false)}>
-                <Text className="text-white text-3xl">Playing</Text>
-            </TouchableOpacity>
-            :
-            <TouchableOpacity className="w-full h-60 rounded-xl mt-3 relative justify-center items-center" activeOpacity={0.7} onPress={()=>setPlay(true)}>
-                <Image source={{uri:thumbnail}} className="w-[350px] h-full rounded-xl mt-3" resizeMode='contain'/>
-                <Image source={icons.play} className="w-12 h-12 absolute" resizeMode='contain'/>
-            </TouchableOpacity>
+      
+        {play ? 
+        <Video 
+            source={{ uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }} 
+            className="w-full h-60 rounded-xl mt-3 bg-white/10" 
+            resizeMode={ResizeMode.CONTAIN} 
+            useNativeControls 
+            shouldPlay
+            onPlaybackStatusUpdate={(status) => {
+            if(status.didJustFinish){
+                setPlay(false)
             }
-        </View>
+            }}
+            onError={(error) => {
+            console.log("Video Error:", error);
+            }}
+        />
+        :
+        <TouchableOpacity className="w-full h-60 rounded-xl mt-3 relative justify-center items-center" activeOpacity={0.7} onPress={()=>setPlay(true)}>
+            <Image source={{uri:thumbnail}} className="w-full h-full rounded-xl mt-3" resizeMode='contain'/>
+            <Image source={icons.play} className="w-12 h-12 absolute" resizeMode='contain'/>
+        </TouchableOpacity>
+        }
+        
      </View>
    )
  }
