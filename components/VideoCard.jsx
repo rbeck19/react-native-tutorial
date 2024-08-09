@@ -26,7 +26,7 @@ import { Video, ResizeMode } from 'expo-av'
       
         {play ? 
         <Video 
-            source={{ uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }} 
+            source={{ uri: video || 'https://www.w3schools.com/html/mov_bbb.mp4' }} 
             className="w-full h-60 rounded-xl mt-3 bg-white/10" 
             resizeMode={ResizeMode.CONTAIN} 
             useNativeControls 

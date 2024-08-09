@@ -33,7 +33,7 @@ const TrendingItem = ({activeItem, item}) => {
     >
       {play ? 
         <Video 
-          source={{ uri: 'https://www.w3schools.com/html/mov_bbb.mp4' }} 
+          source={{ uri: item.video || 'https://www.w3schools.com/html/mov_bbb.mp4' }} 
           className="w-52 h-72 rounded-[35px] mt-3 bg-white/10" 
           resizeMode={ResizeMode.CONTAIN} 
           useNativeControls 
@@ -46,6 +46,7 @@ const TrendingItem = ({activeItem, item}) => {
           onError={(error) => {
             console.log("Video Error:", error);
           }}
+
         />
         :
         <TouchableOpacity className="items-center justify-center relative" activeOpacity={0.7} onPress={()=>setPlay(true)}>
